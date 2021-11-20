@@ -1,19 +1,18 @@
-name: Python application
+name: Deploy
 
 on:
   push:
-    branches: 
+    branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
       - uses: actions/checkout@v2
-      - name: Login to Heroku Container registry
-        run: heroku container:login       
-      - name: Build and push
-        run: heroku container:push -a em-debug-mybnb-app
-      - name: Release
-        run: heroku container:release -a em-debug-mybnb-app
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "em-debug-mybnb-app" #Must be unique in Heroku
+          heroku_email: "emmburnham@gmail.com"
+          usedocker: true
