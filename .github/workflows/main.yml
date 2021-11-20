@@ -14,6 +14,6 @@ jobs:
       - name: Login to Heroku Container registry
         run: heroku container:login       
       - name: Build and push
-        run: heroku container:push -a mybnb-app
+        run: heroku container:push -a em-debug-mybnb-app
       - name: Release
-        run: heroku container:release -a mybnb-app
+        run: heroku container:release -a em-debug-mybnb-app
